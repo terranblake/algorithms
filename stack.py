@@ -21,18 +21,3 @@ class Stack(object):
         current = self.list.head
         self.list.head = Node(new_data)
         self.list.head.set_next(current)
-        print(self.list.head.get_data())
-
-if __name__ == '__main__':
-    myStack = Stack()
-
-    myStack.push('m')
-    myStack.push('i')
-    myStack.push('n')
-    myStack.push('d')
-
-    myStack.pop()
-
-    print(myStack.pop())
-    print(myStack.pop())
-    print(myStack.pop())
