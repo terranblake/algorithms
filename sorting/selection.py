@@ -6,11 +6,9 @@ class selection(object):
         print(arr[:20])
         spos = -1
         pos = -1
-        org = arr
 
         for i in arr:
-            current = i
-            min = 100
+            min = 100000
             swap = 1
             pos += 1
 
@@ -25,7 +23,7 @@ class selection(object):
 
             swap = 1
             spos = -1
-            min = 100
+            min = 100000
 
         return arr
 
@@ -33,7 +31,7 @@ class selection(object):
 def main():
     mySort = selection()
 
-    print(mySort.sort([randint(1, 100) for x in range(randint(10, 50))]))
+    print(mySort.sort([randint(1, 1000) for x in range(randint(10, 1000))])[:20])
 
 
 if __name__ == '__main__':
