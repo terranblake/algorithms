@@ -11,6 +11,9 @@ class Queue(object):
     def is_empty(self):
         return self.list.head is None
 
+    def find(self, data):
+        return self.list.search(data)
+
     def __next__(self):
         if self.has_next():
             current = self.iter
@@ -49,7 +52,7 @@ def main():
     for word in 'To be or not to be, that is the question'.split(' '):
         myQueue.enqueue(word)
 
-    print(myQueue.__next__())
+    print(myQueue.find('is'))
 
 
 if __name__ == '__main__':

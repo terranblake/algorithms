@@ -11,6 +11,9 @@ class Stack(object):
     def is_empty(self):
         return self.current.get_next()
 
+    def find(self, data):
+        return self.list.search(data)
+
     def __next__(self):
         if self.has_next():
             current = self.iter
@@ -43,7 +46,7 @@ def main():
     for word in 'To be or not to be, that is the question?'.split(' '):
         myStack.push(word)
 
-    print(myStack.__next__())
+    print(myStack.find('question?'))
 
 
 if __name__ == '__main__':
