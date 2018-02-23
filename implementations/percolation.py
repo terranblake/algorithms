@@ -8,7 +8,7 @@ class Percolation(object):
         self.grid = []
 
         for x in range(size):
-                self.grid.append(['x'] * size)
+                self.grid.append(['`'] * size)
 
     def open(self, row=None, column=None):
         if row > len(self.grid) or column > len(self.grid):
@@ -17,11 +17,12 @@ class Percolation(object):
             raise Exception('-- Please enter values equal, or greater, than 1.')
 
         if self.isOpen(row, column):
-            self.grid[row - 1][column - 1] = 'o'
+            self.grid[row - 1][column - 1] = '☐'
 
     def isOpen(self, row=None, column=None):
-        return self.grid[row - 1][column - 1] == 'x'
+        return self.grid[row - 1][column - 1] == '`'
 
+    # Site that connects to the top row of the grid
     def isFull(self, row=None, column=None):
         raise NotImplementedError
 
@@ -30,7 +31,7 @@ class Percolation(object):
 
         for columns in self.grid:
             for item in columns:
-                if item == 'o':open_sites += 1
+                if item == '☐':open_sites += 1
         
         return 'There are {} open sites in the grid.'.format(open_sites)
 
@@ -43,11 +44,12 @@ class Percolation(object):
 
 
 def main():
-    my_percolation = Percolation(10)
+    size = 20
+    my_percolation = Percolation(size)
 
-    for x in range(50):
-        row = randint(1, 10)
-        col = randint(1, 10)
+    for x in range(300):
+        row = randint(1, size)
+        col = randint(1, size)
 
         my_percolation.open(row, col)
 

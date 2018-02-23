@@ -31,7 +31,7 @@ class selection(object):
 def main():
     mySort = selection()
 
-    print(mySort.sort([randint(1, 1000) for x in range(randint(10, 1000))])[:20])
+    print(mySort.sort([randint(1, 1000) for x in range(randint(10, 15))])[:20])
 
 
 if __name__ == '__main__':
