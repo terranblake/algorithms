@@ -33,7 +33,7 @@ class Percolation(object):
             for item in columns:
                 if item == '☐':open_sites += 1
         
-        return 'There are {} open sites in the grid.'.format(open_sites)
+        return open_sites
 
     def displayGrid(self):
         for x in range(len(self.grid)):

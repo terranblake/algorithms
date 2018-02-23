@@ -17,10 +17,6 @@ class shell(object):
                 sortPos += 1
 
                 if arr[(normPos * step) - sortPos] > i:
-                    print(arr)
-                    print('Comparing:',arr[(normPos * step) - sortPos] , 'to', arr[(normPos * step) - swapConsec])
-                    print('Positions:',str((normPos * step) - sortPos) , '||', str((normPos * step) - swapConsec))
-
                     arr[(normPos * step) - swapConsec], arr[(normPos * step) - sortPos] = arr[(normPos * step) - sortPos], arr[(normPos * step)- swapConsec]
                     swapConsec += 1
                 else:
@@ -38,7 +34,9 @@ def main():
 
     input = [randint(1, 10) for x in range(randint(10, 20))]
 
+    # First, 3-step
     first = mySort.sort(input, 3)
+    # Then, 1-step
     second = mySort.sort(input, 1)
 
     print(second)
