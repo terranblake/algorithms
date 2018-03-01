@@ -31,7 +31,7 @@ class Percolation(object):
 
         for columns in self.grid:
             for item in columns:
-                if item == '☐':open_sites += 1
+                if item == '☐': open_sites += 1
         
         return open_sites
 

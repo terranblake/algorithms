@@ -1,13 +1,25 @@
 class Node(object):
-    def __init__(self, data=None, next_node=None):
-        self.data = data
-        self.next_node = next_node
+    def __init__(self, data=None):
+        if not data:
+            raise ValueError('Please provide a value to the Node constructor.')
+        elif type(data) is not int:
+            raise ValueError('Required type for <class \'Node\'> data, is of type <class \'int\'>. \
+                                    \nYou provided data of type {}.'.format(type(data)))
+        else:
+            self.data = data
 
     def get_data(self):
         return self.data
 
     def get_next(self):
-        return self.next_node
+        if(self.next_node):
+            return self.next_node
+        else:
+            raise ValueError('Next Node has not been set.')
 
     def set_next(self, new_next=None):
-        self.next_node = new_next
+        if(type(new_next) == Node):
+            self.next_node = new_next
+        else:
+            raise ValueError('Required type is of <class \'Node\'>. \
+                                    \nYou provided data of type {}.'.format(type(new_next)))

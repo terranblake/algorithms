@@ -1,5 +1,3 @@
-from node import Node
-
 class HashTable(object):
     def __init__(self, size=None):
         self.table = {}
@@ -12,7 +10,7 @@ class HashTable(object):
         if value:
             hashed = self.basic_hash(value)
             self.table[hashed] = value
-        
+            
             return {value: hashed}
 
         raise ValueError('Please provide something to input.')
