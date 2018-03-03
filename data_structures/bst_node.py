@@ -1,8 +1,11 @@
 # Simple Binary Search Tree Node
 class BST_Node(object):
-    def __init__(self, data=None):
+    def __init__(self, data=None, strict=False):
+        self.strict = strict
+
         if not data:
-            raise ValueError('Please provide a value to the Node constructor.')
+            raise ValueError(
+                'Please provide a value to the <class \'BST_Node\'> constructor.')
         elif type(data) is not int:
             raise ValueError('Required type for <class \'Node\'> data, is of type <class \'int\'>. \
                                     \nYou provided data of type {}.'.format(type(data)))
@@ -11,6 +14,10 @@ class BST_Node(object):
             self.left = None
             self.right = None
 
+    # Returns self.data
+    def get_data(self):
+        return self.data
+
     # Returns the left or right Node, if it has been set
     def get_next(self, side=None):
         if(side == 'left' and self.left):
@@ -18,16 +25,19 @@ class BST_Node(object):
         elif(side == 'right' and self.right):
             return self.right
         else:
-            return None
-        # Implement for strict type checking
-            # if(side == ('left' or 'right') and not self.left):
-            #     raise ValueError('The \'{}\' node has not been set. Please set it with <Node>.set_next() first.'.format(side))
-            # else:
-            #     self.invalid_side_error(side)
+            if self.strict:
+                # Implement for strict type checking, else disable
+                if(side == ('left' or 'right') and not self.left):
+                    raise ValueError(
+                        'The \'{}\' node has not been set. Please set it with <Node>.set_next() first.'.format(side))
+                else:
+                    self.invalid_side_error(side)
+            else:
+                return None
 
     # Sets the left or right Node, if provided with a valid Node object
     def set_next(self, side=None, data=None):
-        if(type(data) == BST_Node):
+        if(type(data) is BST_Node):
             if(side == 'left'):
                 self.left = data
             elif(side == 'right'):
