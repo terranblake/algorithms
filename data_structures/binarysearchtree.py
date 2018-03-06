@@ -30,13 +30,13 @@ class BinarySearchTree(object):
                 # If next branch exists, navigate
                 if node_left:
                     # Add current location to path
-                    print(node_data, ' > ', data, '\nNavigate Left')
+                    # print(node_data, ' > ', data, '\nNavigate Left')
                     self.path.append(node_left.get_data())
 
                     self.insert(data, node_left)
                 # Else, place new node
                 else:
-                    print(node_data, ' > ', data, '\nInserting Node on Left\n')
+                    # print(node_data, ' > ', data, '\nInserting Node on Left\n')
                     node.set_next('left', new_node)
                     return True
 
@@ -47,13 +47,13 @@ class BinarySearchTree(object):
                 # If next branch exists, navigate
                 if node_right:
                     # Add current location to path
-                    print(node_data, ' < ', data, '\nNavigate Right')
+                    # print(node_data, ' < ', data, '\nNavigate Right')
                     self.path.append(node_right.get_data())
 
                     self.insert(data, node_right)
                 # Else, place new node
                 else:
-                    print(node_data, ' < ', data, '\nInserting Node on Right\n')
+                    # print(node_data, ' < ', data, '\nInserting Node on Right\n')
                     node.set_next('right', new_node)
                     return True
             else:
@@ -71,7 +71,7 @@ class BinarySearchTree(object):
             if value is None:
                 raise ValueError('Please provide a value of type < class \'int\'> to search with.')
             else:
-                print('Passing head to search function.\n', self.head.get_data())
+                # print('Passing head to search function.\n', self.head.get_data())
                 # Recursive call to begin searching with the head of this tree
                 self.search(value=value, node=self.head)
         else:
@@ -113,16 +113,22 @@ def main():
     myBST = BinarySearchTree(BST_Node(8))
 
     for item in test_set:
-        print(myBST.insert(int(item)))
-        print(myBST.path, '\t', item, '\n')
+        myBST.insert(int(item))
+        
+        stringified = ''
+        for step in myBST.path:
+            stringified = stringified + (str(step) + ' > ')
+
+        print('Inserted {} at path\t: {}{}'.format(item, stringified, item))
 
     treeHead = myBST.head
 
     headData = treeHead.get_next('left')
-    print(headData.get_data())
+    print('\nBST Head Node value: {}\n'.format(headData.get_data()))
 
-    myBST.search(50)
-    print(myBST.path)
+    test_invalid = 50
+    myBST.search(test_invalid)
+    print(myBST.path, ' for value {}'.format(test_invalid))
 
 
 if __name__ == '__main__':

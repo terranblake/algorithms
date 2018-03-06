@@ -13,7 +13,7 @@ class HashTable(object):
             
             return {value: hashed}
 
-        raise ValueError('Please provide something to input.')
+        return ValueError('Please provide something to input.')
 
     # Call search(self, value), delete and return hashed equivalent
     def delete(self, value):
@@ -24,10 +24,10 @@ class HashTable(object):
         hashed = self.basic_hash(value)
 
         for idx, elm in self.table.items():
-            if idx == hashed:
+            if idx == hashed and elm == value:
                 return idx
             
-        raise ValueError('Provided input not found in table.')
+        return ValueError('Provided input not found in table.')
 
     # Hash value, return result of hashing
     def basic_hash(self, value):
@@ -45,14 +45,14 @@ def main():
     myTable.insert('Jane Doe')
     myTable.insert('Jackson Johnson')
     myTable.insert('Matthew Matthews')
-    # myTable.insert('') # Should return error
+    print(myTable.insert('')) # Should return error
 
     # Test delete function
     myTable.delete('Jane Doe')
 
     # Test search function
-    myTable.search('Jackson Johnson')
-    myTable.search('Jane Doe') # Should return error, since this does not exist
+    print('Jackson Johnson can be found at index:\t{}'.format(myTable.search('Jackson Johnson')))
+    print(myTable.search('Jane Doe')) # Should return error, since this does not exist
 
     print(myTable.print())
 
