@@ -1,6 +1,10 @@
 from random import randint
-from uf_node import UF_Node
 
+class UF_Node(object):
+    def __init__(self, data, rank):
+        # None implies that the Node is the parent
+        self.data = data
+        self.rank = rank
 
 class UnionFind(object):
     def __init__(self, num=None):
@@ -21,13 +25,15 @@ class UnionFind(object):
         return True
 
     def union(self, this=None, on=None):
-        if not this or not on:
+        print(this, 'union on', on)
+
+        if this < 0 or on < 0:
             raise ValueError('Invalid inputs provided.')
 
         if self.connected(this, on):
             print(this, ' and ', on, ' are already in the same set.')
             return
-
+        
         self.components[this].rank = self.find(on)
 
         # Since we can infer that there will be 1 less set after a Union
@@ -54,10 +60,24 @@ class UnionFind(object):
 def main():
     my_UF = UnionFind(10)
 
+    print([node.rank for node in my_UF.components])
+    print([node.data for node in my_UF.components])
+    print('\n')
+
     my_UF.union(2, 1)
     my_UF.union(4, 3)
     my_UF.union(8, 4)
     my_UF.union(9, 3)
+    my_UF.union(0, 4)
+    my_UF.union(1, 8)
+    my_UF.union(5, 6)
+    my_UF.union(6, 7)
+
+    print('\n')
+    print([node.rank for node in my_UF.components])
+    print([node.data for node in my_UF.components])
+    print('\n')
+    print(my_UF.numComponents)
 
 if __name__ == '__main__':
     main()
