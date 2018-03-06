@@ -65,7 +65,6 @@ class BinarySearchTree(object):
     #   return None if 'value is not found, else
     #   return the <class 'BST_Node'> that matches 'value'
     def search(self, value=None, node=None):
-
         if node is None:
             self.path = []
 
