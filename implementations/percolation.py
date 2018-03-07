@@ -8,7 +8,7 @@ class Percolation(object):
         self.grid = []
 
         for x in range(size):
-                self.grid.append(['`'] * size)
+            self.grid.append([UF_Node(data=x, rank=x)] * size)
 
     def open(self, row=None, column=None):
         if row > len(self.grid) or column > len(self.grid):
@@ -16,36 +16,48 @@ class Percolation(object):
         elif row < 1 or column < 1:
             raise Exception('-- Please enter values equal, or greater, than 1.')
 
-        if self.isOpen(row, column):
-            self.grid[row - 1][column - 1] = '☐'
+        if not self.isOpen(row, column):
+            self.open(row=row, column=column)
 
     def isOpen(self, row=None, column=None):
-        return self.grid[row - 1][column - 1] == '`'
+        return self.grid[row - 1][column - 1].open == True
 
     # Site that connects to the top row of the grid
+    # This is essentially the same as the connected() in UnionFind,
+    #   modified to account for a Node connected to the top row
     def isFull(self, row=None, column=None):
-        raise NotImplementedError
+        if self.isOpen(row=row, column=column):
+            for node in self.grid[0]:
+                if self.grid[row - 1][column - 1].rank == node.rank:
+                    return True
+            
+        return False
 
     def numberOfOpenSites(self):
         open_sites = 0
 
         for columns in self.grid:
             for item in columns:
-                if item == '☐': open_sites += 1
+                if item.open: open_sites += 1
         
         return open_sites
 
     def displayGrid(self):
-        for x in range(len(self.grid)):
-            print(self.grid[x])
+        raise NotImplementedError
 
     def percolates(self):
-        raise NotImplementedError
+        for row in self.grid:
+            print([col.open for col in row])
+                
 
 
 def main():
     size = 20
     my_percolation = Percolation(size)
+
+    my_percolation.percolates()
+
+    my_percolation.open(5, 4)
 
     for x in range(300):
         row = randint(1, size)
@@ -55,6 +67,8 @@ def main():
 
     my_percolation.displayGrid()
     print('\n', my_percolation.numberOfOpenSites())
+
+    my_percolation.percolates()
 
 if __name__ == '__main__':
     main()
